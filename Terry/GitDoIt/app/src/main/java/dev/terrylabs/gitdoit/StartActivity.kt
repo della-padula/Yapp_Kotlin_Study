@@ -7,11 +7,13 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import dev.terrylabs.gitdoit.api.ApiClient
+import dev.terrylabs.gitdoit.api.GitHubApi
 import dev.terrylabs.gitdoit.databinding.ActivityStartBinding
+import dev.terrylabs.gitdoit.model.User
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.create
 
 class StartActivity : AppCompatActivity() {
 

@@ -1,4 +1,4 @@
-package dev.terrylabs.gitdoit
+package dev.terrylabs.gitdoit.model
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
