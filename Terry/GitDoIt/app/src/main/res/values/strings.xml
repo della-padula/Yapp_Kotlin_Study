@@ -1,9 +1,12 @@
 <resources>
     <string name="app_name">GitDoIt</string>
 
-    <string name="hello">Let\'s Start</string>
-    <string name="welcome">Welcome To App</string>
-    <string name="start_nickname_input">Enter your Github Nickname</string>
+    <string name="hello">Does not store any user information\nRetrieves information about a published repository.</string>
+    <string name="welcome">My GitHub Statistics</string>
+    <string name="start_nickname_input">Github Username</string>
     <string name="start_start_btn">Start with Github</string>
+
+    <string name="main_title">My Repository</string>
+    <string name="main_exit">Change User</string>
 
 </resources>

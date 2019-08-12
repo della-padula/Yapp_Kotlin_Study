@@ -10,53 +10,85 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorWhite"
         tools:context=".StartActivity">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
             android:layout_centerVertical="true">
 
             <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="90dp"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:layout_gravity="center"
-                android:src="@mipmap/ic_launcher"/>
+                android:src="@drawable/github_light"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/welcome"
-                android:layout_marginTop="10dp"
-                android:textSize="36sp"
-                android:textStyle="bold"
-                android:textColor="#222222"
+                android:layout_marginTop="20dp"
+                android:textSize="20sp"
+                android:textStyle="normal"
+                android:textColor="@color/colorPrimary"
                 android:layout_gravity="center"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/et_nickname"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:textSize="20sp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentStart="true"
+                    android:background="@drawable/edittext_under_border"
+                    android:textColor="@color/textNormal"
+                    android:singleLine="true"
+                    android:imeOptions="actionDone"
+                    android:textColorHint="@color/editTextHint"
+                    android:layout_marginTop="140dp"
+                    android:hint="@string/start_nickname_input"/>
+
+                <ImageButton
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@color/transparent"
+                    android:src="@drawable/btn_text_delete"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"/>
+
+            </RelativeLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/hello"
-                android:layout_marginTop="80dp"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:textColor="#222222"
+                android:textAlignment="center"
+                android:textColorHint="#606060"
+                android:layout_marginTop="10dp"
+                android:textSize="12sp"
+                android:textStyle="normal"
+                android:textColor="@color/textLight"
                 android:layout_gravity="center"/>
 
-            <EditText
-                android:id="@+id/et_nickname"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:hint="@string/start_nickname_input"/>
-
-            <Button
+            <life.sabujak.roundedbutton.RoundedButton
                 android:id="@+id/btn_start"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:layout_marginTop="10dp"
+                android:gravity="center"
+                app:buttonColor="@color/colorPrimary"
+                app:buttonCornerRadius="12dp"
+                android:textSize="20sp"
+                android:textColor="@color/colorWhite"
                 android:onClick="@{activity::onStartClick}"
                 android:text="@string/start_start_btn"/>
         </LinearLayout>

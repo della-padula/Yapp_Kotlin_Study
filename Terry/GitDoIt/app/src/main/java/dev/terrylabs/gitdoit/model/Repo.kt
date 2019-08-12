@@ -16,7 +16,7 @@ class Repo {
     @Expose
     var name: String? = null
 
-    @SerializedName("fullName")
+    @SerializedName("full_name")
     @Expose
     var fullName: String? = null
  }
