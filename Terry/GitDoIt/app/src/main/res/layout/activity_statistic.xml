@@ -255,6 +255,20 @@
                         android:text="0"/>
                 </LinearLayout>
 
+                <org.eazegraph.lib.charts.BarChart
+                    android:layout_below="@+id/layout_val_day"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/bar_chart_day"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:padding="10dp"
+                    app:egShowValues="false"
+                    app:egShowDecimal="false"
+                    app:egBarWidth="12dp"
+                    app:egLegendTextSize="0dp"
+                    app:egLegendColor="@color/transparent"
+                    app:egLegendHeight="0dp"/>
+
             </RelativeLayout>
 
         </com.loopeer.shadow.ShadowView>
@@ -395,6 +409,20 @@
                         android:textColor="@color/textNormal"
                         android:text="0"/>
                 </LinearLayout>
+
+                <org.eazegraph.lib.charts.BarChart
+                    android:layout_below="@+id/layout_val_hour"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/bar_chart_hour"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:padding="10dp"
+                    app:egShowValues="false"
+                    app:egShowDecimal="false"
+                    app:egBarWidth="12dp"
+                    app:egLegendTextSize="0dp"
+                    app:egLegendColor="@color/transparent"
+                    app:egLegendHeight="0dp"/>
 
             </RelativeLayout>
 

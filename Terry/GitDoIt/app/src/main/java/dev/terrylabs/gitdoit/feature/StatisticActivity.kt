@@ -10,6 +10,7 @@ import dev.terrylabs.gitdoit.R
 import dev.terrylabs.gitdoit.api.ApiClient
 import dev.terrylabs.gitdoit.api.GitHubApi
 import dev.terrylabs.gitdoit.databinding.ActivityStatisticBinding
+import org.eazegraph.lib.models.BarModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -70,6 +71,11 @@ class StatisticActivity : AppCompatActivity() {
         binding.tvDayValThu.text = "${dayCommitCount[4]}"
         binding.tvDayValFri.text = "${dayCommitCount[5]}"
         binding.tvDayValSat.text = "${dayCommitCount[6]}"
+
+        for(value in dayCommitCount.indices) {
+            binding.barChartDay.addBar(BarModel((((dayCommitCount[value]).toFloat() / getMaxValueFromArray(dayCommitCount)) * 100.0f), 0xFF8bc7f5.toInt()))
+        }
+        binding.barChartDay.startAnimation()
     }
 
     private fun addCommitCountEachHourToArray(param: List<List<Int>>) {
@@ -82,10 +88,24 @@ class StatisticActivity : AppCompatActivity() {
         binding.tvHourVal3.text = "${hourCommitCount[2]}"
         binding.tvHourVal4.text = "${hourCommitCount[3]}"
 
-        Log.e("MAIN ::", "${hourCommitCount[0]}/${hourCommitCount[1]}/${hourCommitCount[2]}/${hourCommitCount[3]}")
+        for(value in hourCommitCount.indices) {
+            binding.barChartHour.addBar(BarModel((((hourCommitCount[value]) / getMaxValueFromArray(hourCommitCount).toFloat()) * 100.0f), 0xFF8bc7f5.toInt()))
+        }
+        binding.barChartHour.startAnimation()
     }
 
     fun onBackClick(view: View) {
         onBackPressed()
+    }
+
+    private fun getMaxValueFromArray(input: Array<Int>): Float {
+        var max = 0.0f
+        for(i in input) {
+            if (max < i) {
+                max = i.toFloat()
+            }
+        }
+
+        return max
     }
 }
