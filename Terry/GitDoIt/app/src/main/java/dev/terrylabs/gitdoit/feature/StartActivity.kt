@@ -1,4 +1,4 @@
-package dev.terrylabs.gitdoit
+package dev.terrylabs.gitdoit.feature
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +7,9 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import dev.terrylabs.gitdoit.BaseApplication
+import dev.terrylabs.gitdoit.R
+import dev.terrylabs.gitdoit.Util
 import dev.terrylabs.gitdoit.api.ApiClient
 import dev.terrylabs.gitdoit.api.GitHubApi
 import dev.terrylabs.gitdoit.databinding.ActivityStartBinding

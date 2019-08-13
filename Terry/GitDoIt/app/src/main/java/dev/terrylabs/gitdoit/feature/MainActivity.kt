@@ -1,11 +1,15 @@
-package dev.terrylabs.gitdoit
+package dev.terrylabs.gitdoit.feature
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import dev.terrylabs.gitdoit.BaseApplication
+import dev.terrylabs.gitdoit.R
+import dev.terrylabs.gitdoit.RepoAdapter
 import dev.terrylabs.gitdoit.api.ApiClient
 import dev.terrylabs.gitdoit.api.GitHubApi
 import dev.terrylabs.gitdoit.databinding.ActivityMainBinding
@@ -49,6 +53,12 @@ class MainActivity : AppCompatActivity() {
 
         binding.rvRepoList.adapter = RepoAdapter(this, list) { repo ->
             Toast.makeText(this, "Repository Name : ${repo.name}", Toast.LENGTH_SHORT).show()
+
+            val intent = Intent(this, StatisticActivity::class.java)
+            intent.putExtra("name", repo.name)
+            intent.putExtra("full-name", repo.fullName)
+
+            startActivity(intent)
         }
         binding.rvRepoList.setHasFixedSize(true)
         binding.rvRepoList.layoutManager = LinearLayoutManager(this)
@@ -56,18 +66,7 @@ class MainActivity : AppCompatActivity() {
 
         // TEMP
         /*
-        this.gitHubService.getRepoCommitPerHourEachDay(BaseApplication.userData.login!!, list[0].name!!)
-            .enqueue(object : Callback<List<List<Int>>> {
-                override fun onFailure(call: Call<List<List<Int>>>, t: Throwable) {
-                    Log.e("MAIN ::", "Load RepositoryList - Failure")
-                }
 
-                override fun onResponse(call: Call<List<List<Int>>>, response: Response<List<List<Int>>>) {
-                    response.body()?.let {
-                        printNestedArray(response.body())
-                    }
-                }
-            })
             */
     }
 

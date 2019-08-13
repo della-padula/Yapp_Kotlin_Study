@@ -12,4 +12,6 @@
     <color name="textNormal">#222222</color>
     <color name="textLight">#808080</color>
     <color name="editTextHint">#c0c0c0</color>
+
+    <color name="colorPrimaryLight">#a8d6f9</color>
 </resources>
