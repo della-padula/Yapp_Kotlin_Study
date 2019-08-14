@@ -5,11 +5,13 @@ import dev.terrylabs.gitdoit.model.User
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 
 interface GitHubApi {
     @GET("users/{user}/repos")
-    fun listRepos(@Path("user") user: String): Call<List<Repo>>
+    fun listRepos(@Path("user") user: String, @Query("type") type: String,
+                  @Query("sort") sort: String, @Query("direction") direction: String): Call<List<Repo>>
 
     @GET("users/{user}")
     fun userCheck(@Path("user") user: String): Call<User>
