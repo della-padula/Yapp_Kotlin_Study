@@ -135,7 +135,7 @@ fun toPostOrderString(string : String) : MutableList<String> {
                     operend.add(el)
                 }
                 ")"->{
-                    while(operend.last() != ")"){
+                    while(operend.last() != "("){
                         postString.add(operend.last())
                         operend.removeAt(operend.lastIndex)
                     }
