@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">GitDoIt</string>
+
+    <string name="hello">Does not store any user information\nRetrieves information about a published repository.
+    </string>
+    <string name="welcome">My GitHub Statistics</string>
+    <string name="start_nickname_input">Github Username</string>
+    <string name="start_start_btn">Start with Github</string>
+
+    <string name="main_title">My Repository</string>
+    <string name="main_exit">Change User</string>
+
+    <string name="mon">Mon</string>
+    <string name="tue">Tue</string>
+    <string name="wed">Wed</string>
+    <string name="thu">Thu</string>
+    <string name="fri">Fri</string>
+    <string name="sat">Sat</string>
+    <string name="sun">Sun</string>
+
+    <string name="cate_day">Commits per Day</string>
+    <string name="cate_sub_day">Last Commit Week</string>
+
+    <string name="hour_range_1">00–05</string>
+    <string name="hour_range_2">06–11</string>
+    <string name="hour_range_3">12–17</string>
+    <string name="hour_range_4">18–23</string>
+
+    <string name="cate_hour">Commits per Hour</string>
+    <string name="cate_sub_hour">Last Commit Week</string>
+
+</resources>
