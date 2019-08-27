@@ -2,22 +2,30 @@ package org.androidtown.todolist
 
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.toast
 
 class MainActivity : AppCompatActivity() {
-
+    lateinit var binding: org.androidtown.todolist.databinding.ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding.activity = this
         setSupportActionBar(toolbar)
+    }
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+    fun onFABClick(view: View) {
+        Toast.makeText(this, "HELLO", Toast.LENGTH_SHORT).show()
+        Add.setOnClickListener {
+            startActivity<EditAct>()
         }
     }
 
