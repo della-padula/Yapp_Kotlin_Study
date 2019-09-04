@@ -1,32 +1,48 @@
 package org.androidtown.todolist
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
-import androidx.databinding.DataBindingUtil
-
+import io.realm.Realm
+import io.realm.Sort
+import io.realm.kotlin.where
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.content_main.*
+import androidx.databinding.DataBindingUtil
 import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.toast
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: org.androidtown.todolist.databinding.ActivityMainBinding
+    val realm = Realm.getDefaultInstance()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.activity = this
         setSupportActionBar(toolbar)
+
+        val realmResult = realm.where<Todo>().findAll().sort("date", Sort.DESCENDING)
+        val adapter = TodoAdapter(realmResult)
+
+        ListView.adapter = adapter
+        realmResult.addChangeListener { _ -> adapter.notifyDataSetChanged() }
+        ListView.setOnItemClickListener { parent, view, position, ID ->
+            startActivity<EditAct>("ID" to ID)
+        }
+
     }
 
     fun onFABClick(view: View) {
-        Toast.makeText(this, "HELLO", Toast.LENGTH_SHORT).show()
         Add.setOnClickListener {
             startActivity<EditAct>()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        realm.close()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -44,4 +60,6 @@ class MainActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
+
+
 }

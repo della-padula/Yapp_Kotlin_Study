@@ -2,14 +2,11 @@ package org.androidtown.todolist
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.CalendarView
 import io.realm.Realm
 import io.realm.kotlin.createObject
 import io.realm.kotlin.where
 import kotlinx.android.synthetic.main.activity_calender.*
 import org.jetbrains.anko.alert
-import org.jetbrains.anko.editText
 import org.jetbrains.anko.yesButton
 import java.util.*
 
@@ -20,11 +17,11 @@ class EditAct : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calender)
-        var ID = intent.getLongExtra("ID",-1L)
+        val ID = intent.getLongExtra("ID",-1L)
         if(ID == -1L)
-            insert()
+            insertMode()
         else
-            update(ID)
+            updateMode(ID)
 
         calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
             calendar.set(Calendar.YEAR, year)
@@ -38,19 +35,29 @@ class EditAct : AppCompatActivity() {
         realm.close()
     }
 
-    private fun insert()
+    private fun nextID() : Int{
+        val maxID = realm.where<Todo>().max("ID")
+        if(maxID != null)
+            return maxID.toInt() + 1
+        return 0
+    }
+
+    private fun insertMode(){
+        DeleteButt.hide()
+        DoneButt.setOnClickListener {
+            insertTodo()
+        }
+    }
+
+    private fun insertTodo()
     {
         realm.beginTransaction()
-        val newItem = realm.createObject<Todo>(nextID())
 
+        val newItem = realm.createObject<Todo>(nextID())
         newItem.title = TodoEditText.text.toString()
         newItem.date = calendar.timeInMillis
 
         realm.commitTransaction()
-
-        DoneButt.setOnClickListener{
-            insert()
-        }
 
         alert("내용이 추가되었습니다."){
             yesButton { finish() }
@@ -58,7 +65,7 @@ class EditAct : AppCompatActivity() {
 
     }
 
-    private fun delete(ID: Long){
+    private fun deleteTodo(ID: Long){
         realm.beginTransaction()
         val deleteItem = realm.where<Todo>().equalTo("ID", ID).findFirst()!!
 
@@ -70,21 +77,10 @@ class EditAct : AppCompatActivity() {
         }.show()
     }
 
-    private fun nextID() : Int{
-        val maxID = realm.where<Todo>().max("ID")
-        if(maxID != null)
-            return maxID.toInt() + 1
-        return 0
-    }
-
-    private fun update(ID: Long) {
+    private fun updateTodo(ID: Long) {
         realm.beginTransaction()
 
         val updateItem = realm.where<Todo>().equalTo("ID", ID).findFirst()!!
-        val todo = realm.where<Todo>().equalTo("ID", ID).findFirst()!!
-        TodoEditText.setText(todo.title)
-        calendarView.date = todo.date
-
         updateItem.title =  TodoEditText.text.toString()
         updateItem.date = calendar.timeInMillis
 
@@ -93,15 +89,20 @@ class EditAct : AppCompatActivity() {
         alert("내용이 변경되었습니다."){
             yesButton{finish()}
         }.show()
+    }
 
-        DoneButt.setOnClickListener{
-            insert()
+    private fun updateMode(ID: Long){
+        val todo = realm.where<Todo>().equalTo("ID", ID).findFirst()!!
+        TodoEditText.setText(todo.title)
+        calendarView.date = todo.date
+
+        DoneButt.setOnClickListener {
+            updateTodo(ID)
         }
 
-        DeleteButt.setOnClickListener{
-            delete(ID)
+        DeleteButt.setOnClickListener {
+            deleteTodo(ID)
         }
-
     }
 }
 
